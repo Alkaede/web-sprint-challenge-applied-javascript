@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-const entry = document.querySelector('.tabs-container')
 
 const Tabs = (topics) => {
   // TASK 3
@@ -18,19 +17,18 @@ const Tabs = (topics) => {
   // </div>
   //
 
-  // const container = document.createElement('div');
+  let entry = document.createElement('div');
+  entry.classList.add('topics');
 
   topics.forEach( lang => {
     const tabs = document.createElement('div');
     tabs.classList.add('tab');
     tabs.textContent = lang;
     entry.appendChild(tabs);
-
-    return entry;
-
   })
-  console.log(entry)
-
+  
+  return entry;
+  
 }
 
 const tabsAppender = (selector) => {
