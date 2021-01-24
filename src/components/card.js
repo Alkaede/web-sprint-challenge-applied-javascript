@@ -1,3 +1,7 @@
+import axios from 'axios';
+
+const articleURL = 'https://lambda-times-api.herokuapp.com/articles'
+
 const Card = (article) => {
   // TASK 5
   // ---------------------
@@ -17,6 +21,47 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+
+  const card = document.createElement('div');
+  card.classList.add('card');
+
+  //making a card for each article
+  for(let i = 0; i < article.length; i++){
+    // setting consts
+    const headline = document.createElement('div');
+    const authorContainer = document.createElement('div');
+    const imgContainer = document.createElement('div');
+    const authorPhoto = document.createElement('img');
+    const authorName = document.createElement('span');
+
+    //headline
+    headline.classList.add('headline');
+    headline.textContent = article[i].headline;
+    card.appendChild(headline);
+
+    //author container
+    authorContainer.classList.add('author');
+    card.appendChild(authorContainer);
+
+    //image container
+    imgContainer.classList.add('img-container');
+    authorContainer.appendChild(imgContainer);
+
+    //author photo
+    authorPhoto.src = article[i].authorPhoto;
+    imgContainer.appendChild(authorPhoto);
+
+    //author name
+    authorName.textContent = `By ${article[i].authorName}`;
+    authorContainer.appendChild(authorName);
+
+    //event listener for headlines
+      headline.addEventListener('click', () =>{
+        console.log(headline)
+      })
+  }
+
+  return card;
 }
 
 const cardAppender = (selector) => {
@@ -28,6 +73,31 @@ const cardAppender = (selector) => {
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
   //
+
+  axios.get(articleURL)
+  .then(res=>{
+    console.log("success")
+    const articleArray = res.data;
+
+    //grabbing arrays from res data
+    const bootStrap = Array.from(articleArray.articles.bootstrap);
+    const javaScript = Array.from(articleArray.articles.javascript);
+    const jQuery = Array.from(articleArray.articles.jquery);
+    const node = Array.from(articleArray.articles.node);
+    const technology = Array.from(articleArray.articles.technology);
+
+    // appending children
+    const parent =  document.querySelector(selector);
+    parent.appendChild(Card(javaScript));
+    parent.appendChild(Card(jQuery));
+    parent.appendChild(Card(node));
+    parent.appendChild(Card(technology));
+    parent.appendChild(Card(bootStrap));
+
+  })
+  .catch(err=>{
+    console.log(err)
+  })
 }
 
 export { Card, cardAppender }
