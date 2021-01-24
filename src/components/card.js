@@ -33,10 +33,12 @@ const Card = (article) => {
     const imgContainer = document.createElement('div');
     const authorPhoto = document.createElement('img');
     const authorName = document.createElement('span');
+    const headlineArt = article[i].headline;
+    const photo = article[i].authorPhoto
 
     //headline
     headline.classList.add('headline');
-    headline.textContent = article[i].headline;
+    headline.textContent = headlineArt;
     card.appendChild(headline);
 
     //author container
@@ -48,7 +50,7 @@ const Card = (article) => {
     authorContainer.appendChild(imgContainer);
 
     //author photo
-    authorPhoto.src = article[i].authorPhoto;
+    authorPhoto.src = photo;
     imgContainer.appendChild(authorPhoto);
 
     //author name
