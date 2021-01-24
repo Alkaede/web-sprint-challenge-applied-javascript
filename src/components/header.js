@@ -13,6 +13,8 @@ const Header = (title, date, temp) => {
   //    <span class="temp">{ temp }</span>
   //  </div>
   //
+
+  //element creating with class distribution
   const div = document.createElement('div');
   div.classList.add('header');
   const hTitle = document.createElement('h1');
@@ -21,15 +23,17 @@ const Header = (title, date, temp) => {
   const tSpan = document.createElement('span');
   tSpan.classList.add('temp');
 
+  //text content
   dSpan.textContent = date;
   hTitle.textContent = title;
   tSpan.textContent = temp;
 
+  //appending children
   div.appendChild(dSpan);
   div.appendChild(hTitle);
   div.appendChild(tSpan);
 
-  return Header;
+  return div;
 }
 
 const headerAppender = (selector) => {
@@ -39,8 +43,11 @@ const headerAppender = (selector) => {
   // It should create a header using the Header component above, passing arguments of your choosing.
   // It should append the header to the element in the DOM that matches the given selector.
   //
+  
+  //setting up const to be selector input
   const selParent = document.querySelector(selector);
 
+  
   return selParent.appendChild(Header('Lambda Times', 'Jan 24, 2021', '58*F'));
 
 }
